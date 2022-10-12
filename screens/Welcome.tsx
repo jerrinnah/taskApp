@@ -14,13 +14,15 @@ const Welcome = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      
       <Text style={styles.title}>Welcome</Text>
+     
       <View style={styles.inputRow}>
         <TextInput
           style={styles.input}
           value={user}
           onChangeText={handleOnChangeText}
-          placeholder="Enter Name to continue"
+          placeholder="Enter Name to continue:"
         />
         
         <TouchableOpacity style={styles.btn}>
@@ -61,6 +63,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-end',
+    // backgroundColor: 'green',
+    
   },
   input: {
     width,
@@ -82,5 +86,26 @@ const styles = StyleSheet.create({
   btn: {
     position: 'absolute',
     right:10,
+  },
+
+  amorita: {
+    height: 100,
+    width: 100,
+    borderWidth: 3,
+    borderColor: 'red',
+    justifyContent: 'center',
+    alignItems: 'center',
+    // padding:40,
+  },
+  amor: {
+    backgroundColor: 'blue',
+    padding: 10,
+    color: 'white',
+    fontWeight: 'bold',
+    // margin:20,
+    marginRight: 20,
+    marginTop: 20,
+    marginLeft: 20,
+    
   }
 });

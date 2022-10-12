@@ -1,10 +1,8 @@
 import {
   FlatList,
-  Pressable,
   ScrollView,
   StyleSheet,
   Text,
-  TextInput,
   View,
 } from 'react-native';
 import React from 'react';
@@ -15,6 +13,7 @@ import TaskListItem from '../components/TaskListItem';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { TouchableOpacity } from 'react-native';
 import { useState } from 'react';
+import TaskInput from '../components/misc/TaskInput';
 
 const tasks = [
   {
@@ -35,16 +34,17 @@ const tasks = [
 ];
 
 const Home = () => {
-  const [enteredText, setEnteredText] = useState();
+  
   const [tasks, setTasks] = useState([]);
 
   const Tab = createBottomTabNavigator();
 
-  function taskInputHandler(enteredText: string) {
-    setEnteredText(enteredText);
-  } //this func is for fetching user input as user types
+  function addTaskHandler() {
+    
+  }
 
-  function addInputHandler() {
+
+  function addInputHandler(enteredText) {
     setTasks(currentTasks => [...currentTasks,
       {text: enteredText, id: Math.random().toString()}]);
   } //this would be fired when the add button is clicked
@@ -58,21 +58,13 @@ const Home = () => {
           <View style={styles.avi}></View>
         </View>
 
-        <View style={styles.search}>
-          <TextInput
-            onChangeText={taskInputHandler}
-            style={styles.input}
-            placeholder="Add new task"
-          />
-          <TouchableOpacity onPress={addInputHandler}>
-            <Ionicons style={styles.add} name="add" size={25} />
-          </TouchableOpacity>
-        </View>
+        <TaskInput addInput={addInputHandler} />
+       
       </View>
 
       <View style={styles.projects}>
         <View style={styles.projectText}>
-          <Text style={styles.projectTitle}>Project</Text>
+          <Text style={styles.projectTitle}>Task Lists</Text>
           <Text style={styles.projectCategory}>All Tasks</Text>
         </View>
 
@@ -114,7 +106,7 @@ const Home = () => {
 
         <View style={styles.taskField}>
           <View style={styles.taskRow}>
-            <Text style={styles.taskTitle}>Tasks</Text>
+            <Text style={styles.taskTitle}>Notes</Text>
             <Text>View All</Text>
           </View>
         </View>
@@ -176,27 +168,7 @@ const styles = StyleSheet.create({
     left: 280,
     position: 'absolute',
   },
-  search: {
-    height: 40,
-    borderRadius: 10,
-    width: '80%',
-    backgroundColor: 'white',
-    top: 20,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    flexDirection: 'row',
-    paddingLeft: 10,
-    shadowColor: 'grey',
-    shadowOpacity: 0.4,
-  },
-  add: {
-    right: 10,
-  },
-
-  input: {
-    fontSize: 12,
-    paddingLeft: 15,
-  },
+ 
   projects: {
     height: '50%',
     width: '100%',
