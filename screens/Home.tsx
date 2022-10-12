@@ -14,6 +14,7 @@ import TaskCardGrey from '../components/TaskCardGrey';
 import TaskListItem from '../components/TaskListItem';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { TouchableOpacity } from 'react-native';
+import { useState } from 'react';
 
 const tasks = [
   {
@@ -33,9 +34,21 @@ const tasks = [
   },
 ];
 
-const Tab = createBottomTabNavigator();
-
 const Home = () => {
+  const [enteredText, setEnteredText] = useState();
+  const [tasks, setTasks] = useState([]);
+
+  const Tab = createBottomTabNavigator();
+
+  function taskInputHandler(enteredText: string) {
+    setEnteredText(enteredText);
+  } //this func is for fetching user input as user types
+
+  function addInputHandler() {
+    setTasks(currentTasks => [...currentTasks,
+      {text: enteredText, id: Math.random().toString()}]);
+  } //this would be fired when the add button is clicked
+
   return (
     <View style={styles.container}>
       <View style={styles.top}>
@@ -46,8 +59,12 @@ const Home = () => {
         </View>
 
         <View style={styles.search}>
-          <TextInput style={styles.input} placeholder="Add new task" />
-          <TouchableOpacity>
+          <TextInput
+            onChangeText={taskInputHandler}
+            style={styles.input}
+            placeholder="Add new task"
+          />
+          <TouchableOpacity onPress={addInputHandler}>
             <Ionicons style={styles.add} name="add" size={25} />
           </TouchableOpacity>
         </View>
@@ -60,13 +77,37 @@ const Home = () => {
         </View>
 
         <View style={styles.TaskContainer}>
-          <FlatList
+          {/* <FlatList
             horizontal={true}
             data={tasks}
             keyExtractor={task => task.id.toString()}
             renderItem={({ item }) => {
               console.log(item);
               return <TaskCard title="Here say" />;
+            }}
+          /> */}
+          {/* <ScrollView showsVerticalScrollIndicator={false}> */}
+          {/* //Mapping Manually */}
+          {/* {tasks.map(task => (
+              <TouchableOpacity>
+                <View style={styles.mapView}>
+                  <Text style={styles.taskText} key={task}>{task}</Text>
+                </View>
+              </TouchableOpacity>
+            ))} */}
+          {/* </ScrollView> */}
+          <FlatList
+          
+            data={tasks}
+            renderItem={(itemData) => (
+              <View style={styles.mapView}>
+              <Text style={styles.taskText}>
+                {itemData.item.text}
+              </Text>
+            </View>
+            )}
+            keyExtractor={(item, index) => {
+              return item.id;
             }}
           />
         </View>
@@ -210,5 +251,17 @@ const styles = StyleSheet.create({
     top: 90,
     paddingLeft: 20,
     paddingRight: 20,
+  },
+  mapView: {
+    height: 60,
+    width: '90%',
+    backgroundColor: 'black',
+    borderRadius: 5,
+    margin: 5,
+    justifyContent: 'center',
+    paddingLeft: 10,
+  },
+  taskText: {
+    color: 'white',
   },
 });

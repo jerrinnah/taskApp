@@ -19,8 +19,15 @@ const TaskCard = (props) => {
       <View style={styles.Bcircle}>
         <Ionicons name="snow" color="black" size={15} />
       </View>
-      <View style={styles.taskContainer}>
+      {/* <View style={styles.taskContainer}>
         <Text style={styles.taskTitle}>{props.title}</Text>
+        <Text style={styles.taskText}>
+          Lorem is ipsum dolor sit amet consectetur adipisicing elit. Voluptate
+          quibusdam modi deleniti. Atque recusandae, laboriosam dignissimos fuga
+        </Text>
+        </View> */}
+        <View style={styles.taskContainer}>
+        <Text style={styles.taskTitle}>{props.task}</Text>
         <Text style={styles.taskText}>
           Lorem is ipsum dolor sit amet consectetur adipisicing elit. Voluptate
           quibusdam modi deleniti. Atque recusandae, laboriosam dignissimos fuga
