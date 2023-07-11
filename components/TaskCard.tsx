@@ -19,13 +19,7 @@ const TaskCard = (props) => {
       <View style={styles.Bcircle}>
         <Ionicons name="snow" color="black" size={15} />
       </View>
-      {/* <View style={styles.taskContainer}>
-        <Text style={styles.taskTitle}>{props.title}</Text>
-        <Text style={styles.taskText}>
-          Lorem is ipsum dolor sit amet consectetur adipisicing elit. Voluptate
-          quibusdam modi deleniti. Atque recusandae, laboriosam dignissimos fuga
-        </Text>
-        </View> */}
+     
         <View style={styles.taskContainer}>
         <Text style={styles.taskTitle}>{props.task}</Text>
         <Text style={styles.taskText}>
@@ -44,14 +38,7 @@ const TaskCard = (props) => {
 export default TaskCard;
 
 const styles = StyleSheet.create({
-    // container: {
-    //   height: 255,
-    //   width: 203,
-    //   backgroundColor: "green" ,
-    //   borderRadius: 30,
-    //   padding: 20,
-    //   margin: 5,
-    // },
+ 
   Bcircle: {
     height: 40,
     width: 40,

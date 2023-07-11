@@ -8,9 +8,9 @@ const Welcome = ({navigation}) => {
   const [user, setUser] = useState('');
   const handleOnChangeText = (text: string) => setUser(text);
   // console.log(user)
-  const handleSubmit = () => {
+  // const handleSubmit = () => {
  
-  }
+  // }
 
   return (
     <View style={styles.container}>
@@ -28,13 +28,12 @@ const Welcome = ({navigation}) => {
         <TouchableOpacity style={styles.btn}>
         <RoundIconBtn
           iconName="arrow-right"
-          size="20"
           color={colors.dark}
           style={undefined}
           onPress={() => navigation.navigate('Nav')}
           
         />
-        </TouchableOpacity>
+        </TouchableOpacity> 
       </View>
     </View>
   );
@@ -53,7 +52,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    fontSize: 20,
+    fontSize: 17,
     alignSelf: 'flex-start',
     paddingLeft: 30,
     fontWeight: 'bold',
@@ -65,7 +64,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     // backgroundColor: 'green',
     
-  },
+  }, 
   input: {
     width,
     height: 50,
@@ -87,25 +86,4 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right:10,
   },
-
-  amorita: {
-    height: 100,
-    width: 100,
-    borderWidth: 3,
-    borderColor: 'red',
-    justifyContent: 'center',
-    alignItems: 'center',
-    // padding:40,
-  },
-  amor: {
-    backgroundColor: 'blue',
-    padding: 10,
-    color: 'white',
-    fontWeight: 'bold',
-    // margin:20,
-    marginRight: 20,
-    marginTop: 20,
-    marginLeft: 20,
-    
-  }
 });

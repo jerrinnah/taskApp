@@ -1,18 +1,21 @@
 import {
   FlatList,
-  ScrollView,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
 import React from 'react';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, Entypo } from '@expo/vector-icons';
 import TaskCard from '../components/TaskCard';
 import TaskCardGrey from '../components/TaskCardGrey';
 import TaskListItem from '../components/TaskListItem';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { TouchableOpacity } from 'react-native';
+import { Pressable } from 'react-native';
 import { useState } from 'react';
+import NoteInput from '../components/misc/NoteInput';
+import { Button } from 'react-native-elements/dist/buttons/Button';
+import TaskItem from '../components/TaskItem';
 import TaskInput from '../components/misc/TaskInput';
 
 const tasks = [
@@ -34,20 +37,34 @@ const tasks = [
 ];
 
 const Home = () => {
-  
   const [tasks, setTasks] = useState([]);
-
+  const [notes, setNotes] = useState([]);
+ 
   const Tab = createBottomTabNavigator();
 
-  function addTaskHandler() {
-    
+  function addInputHandler(enteredText) {
+    setTasks((currentTasks) => [
+      ...currentTasks,
+      { text: enteredText, id: Math.random().toString()},
+    ]);
+  } //this would be fired when the add task button is clicked
+
+  function addNoteToList() {
+    setNotes(currentNotes => [
+      ...currentNotes,
+      { text: enteredNote, id: Math.random().toString() },
+    ]);
+    // console.log(enteredNote)
   }
 
-
-  function addInputHandler(enteredText) {
-    setTasks(currentTasks => [...currentTasks,
-      {text: enteredText, id: Math.random().toString()}]);
-  } //this would be fired when the add button is clicked
+  function deleteTaskHandler(id: any) {
+    setTasks(currentTasks => {
+      return currentTasks.filter((task)=> task.id !== id);
+    });
+    // console.log("Deleted")
+  }
+ 
+ 
 
   return (
     <View style={styles.container}>
@@ -57,9 +74,8 @@ const Home = () => {
           <Text style={styles.title}>Lets create your task lists...</Text>
           <View style={styles.avi}></View>
         </View>
-
+        {/* <Button  title="Add New Task" /> */}
         <TaskInput addInput={addInputHandler} />
-       
       </View>
 
       <View style={styles.projects}>
@@ -69,57 +85,36 @@ const Home = () => {
         </View>
 
         <View style={styles.TaskContainer}>
-          {/* <FlatList
-            horizontal={true}
-            data={tasks}
-            keyExtractor={task => task.id.toString()}
-            renderItem={({ item }) => {
-              console.log(item);
-              return <TaskCard title="Here say" />;
-            }}
-          /> */}
-          {/* <ScrollView showsVerticalScrollIndicator={false}> */}
-          {/* //Mapping Manually */}
-          {/* {tasks.map(task => (
-              <TouchableOpacity>
-                <View style={styles.mapView}>
-                  <Text style={styles.taskText} key={task}>{task}</Text>
-                </View>
-              </TouchableOpacity>
-            ))} */}
-          {/* </ScrollView> */}
+         
           <FlatList
-          
             data={tasks}
-            renderItem={(itemData) => (
-              <View style={styles.mapView}>
-              <Text style={styles.taskText}>
-                {itemData.item.text}
-              </Text>
-            </View>
-            )}
+            renderItem={(itemData) => {
+              return (
+                <TaskItem text={itemData.item.text} />
+              );
+            }}
+              
+           
             keyExtractor={(item, index) => {
               return item.id;
             }}
           />
         </View>
 
-        <View style={styles.taskField}>
-          <View style={styles.taskRow}>
-            <Text style={styles.taskTitle}>Notes</Text>
-            <Text>View All</Text>
-          </View>
+        <View style={styles.taskLists}>
+          <FlatList
+            data={notes}
+            renderItem={itemData => {
+              return <Text>{itemData.item.text}</Text>;
+            }}
+          />
         </View>
       </View>
-      <View style={styles.taskLists}>
-        <ScrollView
-          style={{ height: '100%', width: '100%' }}
-          showsVerticalScrollIndicator={false}
-        >
-          <TaskListItem taskList="Entry for new projects and..." />
-          <TaskListItem taskList="Start brand development for new client" />
-        </ScrollView>
-      </View>
+     
+  
+      <View style={styles.noteContainer}>
+           {/* <NoteInput /> */}
+        </View>
     </View>
   );
 };
@@ -168,7 +163,7 @@ const styles = StyleSheet.create({
     left: 280,
     position: 'absolute',
   },
- 
+
   projects: {
     height: '50%',
     width: '100%',
@@ -224,16 +219,15 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
   },
-  mapView: {
-    height: 60,
-    width: '90%',
-    backgroundColor: 'black',
-    borderRadius: 5,
-    margin: 5,
-    justifyContent: 'center',
-    paddingLeft: 10,
+ 
+  noteTitle: {
+    flexDirection: 'row',
   },
-  taskText: {
-    color: 'white',
-  },
+  noteContainer: {
+    height: 100,
+    width: '100%',
+    // padding:20,
+    // backgroundColor: 'red',
+
+  }
 });

@@ -19,11 +19,6 @@ export default RoundIconBtn;
 
 const styles = StyleSheet.create({
   icon: {
-    // backgroundColor: colors.error,
-    // borderRadius: 15,
-    // paddingBottom: 20,
-    // position: 'absolute',
-    //     right: 20,
-
+ 
   },
 });
